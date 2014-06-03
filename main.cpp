@@ -1,5 +1,5 @@
 /* 
-* CREATED BY Lucas Vieira Costa Nicolau <-> FROM USP University
+* CREATED BY Lucas Vieira Costa Nicolau - USP
 * Used amoung with SDL2 
 * -- (good tutorial tip : SDL LAZY FOO --there's other, but this was the most 
 * used by me on learning)

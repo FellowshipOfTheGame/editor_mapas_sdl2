@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>editor_mapa.h</itemPath>
+      <itemPath>sdl_basics.h</itemPath>
     </logicalFolder>
     <logicalFolder name="img" displayName="img" projectFiles="true">
       <itemPath>img/img_1.png</itemPath>
@@ -28,7 +29,6 @@
       <itemPath>editor_mapa.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>sdl_basics.cpp</itemPath>
-      <itemPath>sdl_basics.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"

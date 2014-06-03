@@ -1,0 +1,10 @@
+# Don’t commit the following directories.
+# NONE
+
+# Or the files created
+*.o
+*~
+exec
+
+# Include when developing application packages.
+pubspec.lock
