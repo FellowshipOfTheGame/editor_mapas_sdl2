@@ -1,0 +1,15 @@
+Commands
+==========================
+s - Save
+
+l - Load
+
+0 - reset block type
+
+1 to 9 - select between image block type 
+
+r - fill Right with block type
+
+d - fill Down with block type
+
+Mouse Click - select block

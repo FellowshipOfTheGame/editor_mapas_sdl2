@@ -1,8 +1,0 @@
-s - Save
-l - Load
-z - undo
-y - redo
-r - copy Right
-d - copy Down
-f - full fill
-1 - 9 - trade images
