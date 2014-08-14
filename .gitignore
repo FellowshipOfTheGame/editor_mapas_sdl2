@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Compiled Object files
 *.slo
 *.lo
@@ -26,3 +27,15 @@
 # Backup files
 *.~
 
+=======
+# Don’t commit the following directories.
+# NONE
+
+# Or the files created
+*.o
+*~
+exec
+
+# Include when developing application packages.
+pubspec.lock
+>>>>>>> 05e23fa6a5cb12d183471793cf94071ebf7857c2

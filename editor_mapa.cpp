@@ -1,11 +1,12 @@
 /* 
- * CREATED BY Lucas Vieira Costa Nicolau - USP
- * Used amoung with SDL2 
- * -- (good tutorial tip : SDL LAZY FOO --there are others, but this was the most used by me on learning)
- *
- * -- Open Source, Open to learn, Open to distribute. 
- * Just don't misrepresent my credits and time spend to make this library. Thanks.
- */
+* CREATED BY Lucas Vieira Costa Nicolau - USP
+* Used amoung with SDL2 
+* -- (good tutorial tip : SDL LAZY FOO --there's other, but this was the most 
+* used by me on learning)
+*
+* -- Open Source, Open to learn, Open to distribute. 
+* Just don't misrepresent my credits and time spend to make this library. Thanks.
+*/
 #include "editor_mapa.h"
 
 
@@ -32,12 +33,12 @@
 // IMAGES SOURCES
 #define IMG_EMPTY "img/quad_pont.png"
 #define IMG_SELECT "img/sel_quad_pont.png"
-#define IMG_1 "img/img_1.png"
-#define IMG_2 "img/img_2.png"
-#define IMG_3 "img/img_3.png"
-#define IMG_4 "img/img_4.png"
-#define IMG_5 "img/img_5.png"
-#define IMG_6 "img/img_6.png"
+#define IMG_1 "img/barreira_vertical.png"
+#define IMG_2 "img/barreira_horizontal.png"
+#define IMG_3 "img/quina_q1.png"
+#define IMG_4 "img/quina_q2.png"
+#define IMG_5 "img/quina_q3.png"
+#define IMG_6 "img/quina_q4.png"
 #define IMG_7 "img/img_7.png"
 #define IMG_8 "img/img_8.png"
 #define IMG_9 "img/img_9.png"
@@ -93,27 +94,18 @@ bool editor_mapa() {
 
     //Mouse position
     SDL_Point mPosition;
-    //Init mPosition
-    mPosition.x = 0;	
-    mPosition.y = 0;
-
 
     // Mouse position to matriz
     SDL_Point mPositionMatriz;
-    //Init mPosition
-    mPositionMatriz.x = 0;
-    mPositionMatriz.y = 0;
 
     // Initialize event handler
     SDL_Event event;
 
     while (!quit) {
-
-        if (undo) {
+        if(undo) {
             save_undo();
             undo = false;
         }
-
         if (empty) {
             save_undo();
             if (!empty_mapa()) {
@@ -123,7 +115,6 @@ bool editor_mapa() {
             save_redo();
             empty = false;
         }
-
 
 
         // clear screen
@@ -144,27 +135,26 @@ bool editor_mapa() {
                 case SDL_QUIT:
                     quit = true;
                     break;
-
+                    
                 case SDL_KEYDOWN:
                 {
                     switch (event.key.keysym.sym) {
 
-                        // Exit
+                            // Exit
                         case SDLK_ESCAPE:
                             quit = true;
                             break;
 
-                        // Reset mapa
+                            // Reset mapa
                         case SDLK_INSERT:
                             empty = true;
                             break;
-			
-			
+
                         case SDLK_0:
                             mapa[mPositionMatriz.x][mPositionMatriz.y] = EMPTY;
                             redo = true;
                             break;
-			
+
                         case SDLK_1:
                             mapa[mPositionMatriz.x][mPositionMatriz.y] = 1;
                             redo = true;
@@ -258,34 +248,27 @@ bool editor_mapa() {
                             mapa[mPositionMatriz.x][mPositionMatriz.y] = SELECT;
                             break;
 
-                        // special fill line with select img
-                        case SDLK_r:
+                            // special fill line with select img
+                        case SDLK_l:
                             save_undo();
                             seta_linha(mPositionMatriz, mem_value);
                             save_redo();
                             break;
 
-                        // special fill line with select img
-                        case SDLK_d:
-                            save_undo();
-                            seta_coluna(mPositionMatriz, mem_value);
-                            save_redo();
-                            break;
-                        
-                        case SDLK_f:
+                            // special fill line with select img
+                        case SDLK_c:
                             save_undo();
                             seta_coluna(mPositionMatriz, mem_value);
                             save_redo();
                             break;
 
-                        // Load file
-                        case SDLK_l:
+                            // Load file
+                        case SDLK_f:
                             if (load_mapa()) {
                                 printf("Load Image");
                                 save_undo();
                             }
                             break;
-
                             // Save file
                         case SDLK_s:
                             if (save_mapa()) {
@@ -307,11 +290,9 @@ bool editor_mapa() {
                             }
                             break;
 
-
                     }
                     break;
                 }
-
                 case SDL_MOUSEBUTTONDOWN:
 
                     limpa_selecao();

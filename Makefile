@@ -16,13 +16,5 @@ run:
 	@./exec
 
 clean:
-	@rm -rf *.o *~ *exec
-
-vg:
-	@valgrind ./exec
-
-full_vg:
-	@valgrind  --leak-check=full ./exec
-
-verb_vg:
-	@valgrind  -v ./exec
+	@rm -rf *.o
+	@rm -f *.exec
