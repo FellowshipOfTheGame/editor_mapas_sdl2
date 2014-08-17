@@ -16,8 +16,6 @@ alt left - last roll of img(**)
 
 alt right - next roll of img(**) 
 
-alt right - 
-
 f - fill Forward with block img
 
 b - fill Backward with block img
