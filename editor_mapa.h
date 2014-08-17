@@ -27,8 +27,6 @@ bool load_up(SDL_Window **window, SDL_Surface **screen, SDL_Surface **img);
 
 bool clean_up(SDL_Window **window, SDL_Surface **screen, SDL_Surface **img);
 
-bool load_mapa();
-
 bool save_mapa();
 
 bool save_undo();
@@ -39,11 +37,21 @@ bool load_undo();
 
 bool load_redo();
 
+bool load_mapa(const char *src);
+
 void limpa_selecao();
 
-void seta_linha(SDL_Point mPoint, int value);
+void set_right(SDL_Point mPoint, int value);
 
-void seta_coluna(SDL_Point mPoint, int value);
+void set_down(SDL_Point mPoint, int value);
+
+void set_left(SDL_Point mPoint, int value);
+
+void set_up(SDL_Point mPoint, int value);
+
+void set_all(SDL_Point mPoint, int value);
+
+bool external_load_map(SDL_Surface **screen);
 
 //void retorna_valor_anterior(SDL_Point mPositionMatriz);
                     

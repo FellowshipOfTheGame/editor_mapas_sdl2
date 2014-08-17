@@ -16,5 +16,4 @@ run:
 	@./exec
 
 clean:
-	@rm -rf *.o
-	@rm -f *.exec
+	@rm -rf *.o *exec

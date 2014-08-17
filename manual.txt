@@ -4,6 +4,10 @@ s - Save
 
 l - Load
 
+z - undo
+
+y - redo
+
 0 - reset block type
 
 1 to 9 - select between image block type 

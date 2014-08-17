@@ -10,13 +10,13 @@
 #include "editor_mapa.h"
 
 
-/* --------      IMPORTANT     -----------       *
+/* --------      IMPORTANT     -----------        *
  * - IMAGE DIMENSION (SQUARE_SIZE X SQUARE_SIZE)  *
  * - DO NOT REMOVE ANY DEFINE -- JUST EDIT VALUES */
 
 // SIZE OF MATRIZ
+#define COL 30
 #define LIN 25
-#define COL 25
 
 // DIMENSION OF IMG (ONE SIDE -- NOTE: IMAGE MUST HAVE A SQUARE DIMENSION)
 #define SQUARE_SIZE 20          // TAMANHO DO LADO DO QUADRADO
@@ -28,29 +28,54 @@
 
 // EMPTY AND SELECT VALUES -- 1 - 9  is the images used by the editor
 #define SELECT -1
-#define EMPTY 0
+#define EMPTY -2
 
 // IMAGES SOURCES
-#define IMG_EMPTY "img/quad_pont.png"
-#define IMG_SELECT "img/sel_quad_pont.png"
-#define IMG_1 "img/barreira_vertical.png"
-#define IMG_2 "img/barreira_horizontal.png"
-#define IMG_3 "img/quina_q1.png"
-#define IMG_4 "img/quina_q2.png"
-#define IMG_5 "img/quina_q3.png"
-#define IMG_6 "img/quina_q4.png"
-#define IMG_7 "img/img_7.png"
-#define IMG_8 "img/img_8.png"
-#define IMG_9 "img/img_9.png"
+#define IMG_EMPTY "img/tiles/quad_pont.png"
+#define IMG_SELECT "img/tiles/sel_quad_pont.png"
+#define IMG_0 "img/tiles/img_0.png"
+#define IMG_1 "img/tiles/img_1.png"
+#define IMG_2 "img/tiles/img_2.png"
+#define IMG_3 "img/tiles/img_3.png"
+#define IMG_4 "img/tiles/img_4.png"
+#define IMG_5 "img/tiles/img_5.png"
+#define IMG_6 "img/tiles/img_6.png"
+#define IMG_7 "img/tiles/img_7.png"
+#define IMG_8 "img/tiles/img_8.png"
+#define IMG_9 "img/tiles/img_9.png"
 
+#define IMG_10 "img/tiles/img_10.png"
+#define IMG_11 "img/tiles/img_11.png"
+#define IMG_12 "img/tiles/img_12.png"
+#define IMG_13 "img/tiles/img_13.png"
+#define IMG_14 "img/tiles/img_14.png"
+#define IMG_15 "img/tiles/img_15.png"
+#define IMG_16 "img/tiles/img_16.png"
+#define IMG_17 "img/tiles/img_17.png"
+#define IMG_18 "img/tiles/img_18.png"
+#define IMG_19 "img/tiles/img_19.png"
+
+#define IMG_20 "img/tiles/img_20.png"
+#define IMG_21 "img/tiles/img_21.png"
+#define IMG_22 "img/tiles/img_22.png"
+#define IMG_23 "img/tiles/img_23.png"
+#define IMG_24 "img/tiles/img_24.png"
+#define IMG_25 "img/tiles/img_25.png"
+#define IMG_26 "img/tiles/img_26.png"
+#define IMG_27 "img/tiles/img_27.png"
+#define IMG_28 "img/tiles/img_28.png"
+#define IMG_29 "img/tiles/img_29.png"
+
+ #define MAX_ROLL 3
 // -- GLOBAL VARIABLES --
-int mapa[LIN][COL]; // Draw map
+int mapa[COL][LIN]; // Draw map
 SDL_Point mem; // Save mouse point
 int mem_value; // Save value to restore
 
 // -- MAIN OF FUNCTION -- 
 
 bool editor_mapa() {
+    int img_roll = 0;
     bool quit = false;
     bool empty = true;
     bool redo = false;
@@ -140,6 +165,24 @@ bool editor_mapa() {
                 {
                     switch (event.key.keysym.sym) {
 
+                        case SDLK_LALT:
+                            if(img_roll != 0) {
+                                img_roll--; 
+                            } else {
+                                img_roll = MAX_ROLL - 1;
+                            }
+                            printf("%d\n", img_roll);
+                            break;
+
+                        case SDLK_RALT:
+                            if(img_roll != MAX_ROLL - 1) {
+                                img_roll++; 
+                            } else {
+                                img_roll = 0;
+                            }
+                            printf("%d\n", img_roll);
+                            break;
+
                             // Exit
                         case SDLK_ESCAPE:
                             quit = true;
@@ -150,53 +193,57 @@ bool editor_mapa() {
                             empty = true;
                             break;
 
-                        case SDLK_0:
+                        case SDLK_DELETE:
                             mapa[mPositionMatriz.x][mPositionMatriz.y] = EMPTY;
                             redo = true;
                             break;
 
+                        case SDLK_0:
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 0 + img_roll * 10;
+                            redo = true;
+                            break;
                         case SDLK_1:
-                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 1;
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 1 + img_roll * 10;
                             redo = true;
                             break;
 
                         case SDLK_2:
-                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 2;
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 2 + img_roll * 10;
                             redo = true;
                             break;
 
                         case SDLK_3:
-                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 3;
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 3 + img_roll * 10;
                             redo = true;
                             break;
 
                         case SDLK_4:
-                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 4;
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 4 + img_roll * 10;
                             redo = true;
                             break;
 
                         case SDLK_5:
-                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 5;
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 5 + img_roll * 10;
                             redo = true;
                             break;
 
                         case SDLK_6:
-                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 6;
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 6 + img_roll * 10;
                             redo = true;
                             break;
 
                         case SDLK_7:
-                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 7;
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 7 + img_roll * 10;
                             redo = true;
                             break;
 
                         case SDLK_8:
-                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 8;
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 8 + img_roll * 10;
                             redo = true;
                             break;
 
                         case SDLK_9:
-                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 9;
+                            mapa[mPositionMatriz.x][mPositionMatriz.y] = 9 + img_roll * 10;
                             redo = true;
                             break;
 
@@ -206,6 +253,13 @@ bool editor_mapa() {
                             }
                             if (mPositionMatriz.y != 0) {
                                 mPositionMatriz.y--;
+                            } else {
+                                mPositionMatriz.y = LIN-1;
+                                if(mPositionMatriz.x != 0) {
+                                    mPositionMatriz.x--;
+                                } else {
+                                    mPositionMatriz.x = COL - 1;
+                                }
                             }
 
                             mem_value = mapa[mPositionMatriz.x][mPositionMatriz.y];
@@ -219,6 +273,13 @@ bool editor_mapa() {
                             }
                             if (mPositionMatriz.y != LIN - 1) {
                                 mPositionMatriz.y++;
+                            } else {
+                                mPositionMatriz.y = 0;
+                                if(mPositionMatriz.x != COL - 1) {
+                                    mPositionMatriz.x++;
+                                } else {
+                                    mPositionMatriz.x = 0;
+                                }
                             }
 
                             mem_value = mapa[mPositionMatriz.x][mPositionMatriz.y];
@@ -230,6 +291,13 @@ bool editor_mapa() {
                             }
                             if (mPositionMatriz.x != 0) {
                                 mPositionMatriz.x--;
+                            } else {
+                                mPositionMatriz.x = COL-1;
+                                if(mPositionMatriz.y != 0) {
+                                    mPositionMatriz.y--;
+                                } else {
+                                    mPositionMatriz.y = LIN-1;
+                                }
                             }
 
                             mem_value = mapa[mPositionMatriz.x][mPositionMatriz.y];
@@ -242,6 +310,13 @@ bool editor_mapa() {
                             }
                             if (mPositionMatriz.x != COL - 1) {
                                 mPositionMatriz.x++;
+                            } else {
+                                mPositionMatriz.x = 0;
+                                if(mPositionMatriz.y != LIN - 1) {
+                                    mPositionMatriz.y++;
+                                } else {
+                                    mPositionMatriz.y = 0;
+                                }
                             }
 
                             mem_value = mapa[mPositionMatriz.x][mPositionMatriz.y];
@@ -249,28 +324,40 @@ bool editor_mapa() {
                             break;
 
                             // special fill line with select img
-                        case SDLK_l:
+                        case SDLK_d:
                             save_undo();
-                            seta_linha(mPositionMatriz, mem_value);
+                            set_down(mPositionMatriz, mem_value);
+                            save_redo();
+                            break;
+                        case SDLK_u:
+                            save_undo();
+                            set_up(mPositionMatriz, mem_value);
                             save_redo();
                             break;
 
                             // special fill line with select img
-                        case SDLK_c:
+                        case SDLK_f:
                             save_undo();
-                            seta_coluna(mPositionMatriz, mem_value);
+                            set_right(mPositionMatriz, mem_value);
                             save_redo();
                             break;
 
+                        case SDLK_b:
+                            save_undo();
+                            set_left(mPositionMatriz, mem_value);
+                            save_redo();
+                            break;    
+
                             // Load file
-                        case SDLK_f:
-                            if (load_mapa()) {
+                        case SDLK_l:
+                            if (load_mapa(FILE_SOURCE)) {
                                 printf("Load Image");
                                 save_undo();
                             }
                             break;
                             // Save file
                         case SDLK_s:
+			    limpa_selecao();	
                             if (save_mapa()) {
                                 printf("Save Image");
                             }
@@ -289,6 +376,13 @@ bool editor_mapa() {
                                 printf("Load Image");
                             }
                             break;
+
+                        case SDLK_a:
+                            save_undo();
+                            set_all(mPositionMatriz, mem_value);
+                            save_redo();
+                            break;
+
 
                     }
                     break;
@@ -333,7 +427,7 @@ bool load_up(SDL_Window **window, SDL_Surface **screen, SDL_Surface **img) {
         return false;
     }
     //Create window
-    *window = SDL_CreateWindow("Editor de Mapas", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, LIN*SQUARE_SIZE, COL*SQUARE_SIZE, SDL_WINDOW_SHOWN);
+    *window = SDL_CreateWindow("Editor de Mapas", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, COL*SQUARE_SIZE, LIN*SQUARE_SIZE, SDL_WINDOW_SHOWN);
     if (*window == NULL) {
         fprintf(stderr, "Window could not be created! SDL_Error: %s\n", SDL_GetError());
 
@@ -395,15 +489,15 @@ bool tradeImage(SDL_Surface **surface, const char *str) {
     return true;
 }
 
-// Set image for every value of mapa[LIN][COL]
+// Set image for every value of mapa[COL][LIN]
 
 bool matrizToImage(SDL_Rect *offset, SDL_Surface *surface, SDL_Surface *screen) {
     bool draw = false;
 
     SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGB(surface->format, 0x00, 0x00, 0x00));
 
-    for (int i = 0; i < LIN; i++) {
-        for (int j = 0; j < COL; j++) {
+    for (int i = 0; i < COL; i++) {
+        for (int j = 0; j < LIN; j++) {
 
             if (mapa[i][j] == EMPTY) {
 
@@ -417,10 +511,15 @@ bool matrizToImage(SDL_Rect *offset, SDL_Surface *surface, SDL_Surface *screen) 
                     return false;
                 }
                 draw = true;
+            } else if (mapa[i][j] == 0) {
+                if (!tradeImage(&surface, IMG_0)) {
+                    return false;
+
+                }
+                draw = true;
             } else if (mapa[i][j] == 1) {
                 if (!tradeImage(&surface, IMG_1)) {
                     return false;
-
                 }
                 draw = true;
             } else if (mapa[i][j] == 2) {
@@ -464,7 +563,126 @@ bool matrizToImage(SDL_Rect *offset, SDL_Surface *surface, SDL_Surface *screen) 
                 }
                 draw = true;
 
-            }
+            } else if (mapa[i][j] == 10) {
+                if (!tradeImage(&surface, IMG_10)) {
+                    return false;
+                }
+                draw = true;
+ 
+            } else if (mapa[i][j] == 11) {
+                if (!tradeImage(&surface, IMG_11)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 12) {
+                if (!tradeImage(&surface, IMG_12)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 13) {
+                if (!tradeImage(&surface, IMG_13)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 14) {
+                if (!tradeImage(&surface, IMG_14)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 15) {
+                if (!tradeImage(&surface, IMG_15)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 16) {
+                if (!tradeImage(&surface, IMG_16)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 17) {
+                if (!tradeImage(&surface, IMG_17)) {
+                    return false;
+                }
+                draw = true;
+
+            }  else if (mapa[i][j] == 18) {
+                if (!tradeImage(&surface, IMG_18)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 19) {
+                if (!tradeImage(&surface, IMG_19)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 20) {
+                if (!tradeImage(&surface, IMG_20)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 21) {
+                if (!tradeImage(&surface, IMG_21)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 22) {
+                if (!tradeImage(&surface, IMG_22)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 23) {
+                if (!tradeImage(&surface, IMG_23)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 24) {
+                if (!tradeImage(&surface, IMG_24)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 25) {
+                if (!tradeImage(&surface, IMG_25)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 26) {
+                if (!tradeImage(&surface, IMG_26)) {
+                    return false;
+                }
+                draw = true;
+            } else if (mapa[i][j] == 27) {
+                if (!tradeImage(&surface, IMG_27)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 28) {
+                if (!tradeImage(&surface, IMG_28)) {
+                    return false;
+                }
+                draw = true;
+
+            } else if (mapa[i][j] == 29) {
+                if (!tradeImage(&surface, IMG_29)) {
+                    return false;
+                }
+                draw = true;
+
+            } 
             if (draw) {
                 set_sdlRect(offset, i * SQUARE_SIZE, j * SQUARE_SIZE);
                 SDL_BlitSurface(surface, 0, screen, offset);
@@ -479,7 +697,7 @@ bool matrizToImage(SDL_Rect *offset, SDL_Surface *surface, SDL_Surface *screen) 
 
 // Repeat selected image to every point right the selection
 
-void seta_linha(SDL_Point mPoint, int value) {
+void set_right(SDL_Point mPoint, int value) {
     for (int i = mPoint.x; i < COL; i++) {
         mapa[i][mPoint.y] = value;
     }
@@ -487,28 +705,47 @@ void seta_linha(SDL_Point mPoint, int value) {
 
 // Repeat selected image to every point down the selection
 
-void seta_coluna(SDL_Point mPoint, int value) {
+void set_down(SDL_Point mPoint, int value) {
     for (int i = mPoint.y; i < LIN; i++) {
         mapa[mPoint.x][i] = value;
     }
 }
 
-// Reset mapa[LIN][COL] with EMPTY
+void set_left(SDL_Point mPoint, int value) {
+    for (int i = mPoint.x; i >=0; i--) {
+        mapa[i][mPoint.y] = value;
+    }
+}
+
+void set_up(SDL_Point mPoint, int value) {
+    for (int i = mPoint.y; i >= 0; i--) {
+        mapa[mPoint.x][i] = value;
+    }
+}
+
+void set_all(SDL_Point mPoint, int value) {
+    for (int i = 0; i < COL; i++) {
+        for (int j = 0; j < LIN; j++) {
+            mapa[i][j] = value;
+        }
+    }
+}
+// Reset mapa[COL][LIN] with EMPTY
 
 bool empty_mapa() {
-    for (int i = 0; i < LIN; i++) {
-        for (int j = 0; j < COL; j++) {
+    for (int i = 0; i < COL; i++) {
+        for (int j = 0; j < LIN; j++) {
             mapa[i][j] = EMPTY;
         }
     }
     return true;
 }
 
-// Fill mapa[LIN][[COL] with select image
+// Fill mapa[COL][[LIN] with select image
 
 bool fill_mapa() {
-    for (int i = 0; i < LIN; i++) {
-        for (int j = 0; j < COL; j++) {
+    for (int i = 0; i < COL; i++) {
+        for (int j = 0; j < LIN; j++) {
             mapa[i][j] = mem_value;
         }
     }
@@ -529,7 +766,7 @@ bool save_mapa() {
 
     mapa[mem.x][mem.y] = mem_value;
 
-    fwrite(mapa, LIN * COL * sizeof (int), 1, file);
+    fwrite(mapa, COL * LIN * sizeof (int), 1, file);
 
     fclose(file);
     return true;
@@ -544,7 +781,7 @@ bool save_undo() {
 
     limpa_selecao();
 
-    fwrite(mapa, LIN * COL * sizeof (int), 1, file);
+    fwrite(mapa, COL * LIN * sizeof (int), 1, file);
 
     fclose(file);
 
@@ -560,29 +797,27 @@ bool save_redo() {
 
     limpa_selecao();
 
-    fwrite(mapa, LIN * COL * sizeof (int), 1, file);
+    fwrite(mapa, COL * LIN * sizeof (int), 1, file);
 
     fclose(file);
     return true;
 }
 
-
 // -- LOAD --
-
-bool load_mapa() {
-    FILE *file = fopen(FILE_SOURCE, "rb+");
+bool load_mapa(const char *src) {
+    FILE *file = fopen(src, "rb+");
     if (file == NULL) {
         fprintf(stderr, "Erro ao carregar arquivo -- load\n");
         return false;
     }
     fseek(file, 0, SEEK_END);
-    if (ftell(file) < LIN * COL) {
+    if (ftell(file) < COL * LIN) {
         fprintf(stderr, "Erro - arquivo corrompido!\n");
         return false;
     }
     fseek(file, 0, SEEK_SET);
 
-    fread(mapa, LIN * COL * sizeof (int), 1, file);
+    fread(mapa, COL * LIN * sizeof (int), 1, file);
 
     fclose(file);
 
@@ -596,13 +831,13 @@ bool load_undo() {
         return false;
     }
     fseek(file, 0, SEEK_END);
-    if (ftell(file) < LIN * COL) {
+    if (ftell(file) < COL * LIN) {
         fprintf(stderr, "Erro - arquivo corrompido!\n");
         return false;
     }
     fseek(file, 0, SEEK_SET);
 
-    fread(mapa, LIN * COL * sizeof (int), 1, file);
+    fread(mapa, COL * LIN * sizeof (int), 1, file);
 
     fclose(file);
 
@@ -616,14 +851,43 @@ bool load_redo() {
         return false;
     }
     fseek(file, 0, SEEK_END);
-    if (ftell(file) < LIN * COL) {
+    if (ftell(file) < COL * LIN) {
         fprintf(stderr, "Erro - arquivo corrompido!\n");
         return false;
     }
     fseek(file, 0, SEEK_SET);
 
-    fread(mapa, LIN * COL * sizeof (int), 1, file);
+    fread(mapa, COL * LIN * sizeof (int), 1, file);
 
     fclose(file);
+    return true;
+}
+
+bool external_load_map(SDL_Surface **screen) {
+
+    // Load images surfaces
+    SDL_Surface* img = NULL;
+
+    if (!set_sdlSurface(&img, IMG_EMPTY, false)) {
+        fprintf(stderr, "Erro na execucao - %s\n", IMG_EMPTY);
+        return false;
+    }
+    
+    // Load map created
+    load_mapa(FILE_SOURCE);
+    
+    SDL_Rect offset;
+
+    // clear screen
+    SDL_FillRect(*screen, NULL, SDL_MapRGB((*screen)->format, 0xFF, 0xFF, 0xFF));
+
+    // Seta image from matriz loaded
+    if (!matrizToImage(&offset, img, *screen)) {
+       fprintf(stderr, "Error matriz to image\n");
+       return false;
+    }
+	
+    freeSDL_Surface(&img);
+    
     return true;
 }
