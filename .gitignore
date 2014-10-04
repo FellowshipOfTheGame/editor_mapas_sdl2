@@ -1,0 +1,41 @@
+<<<<<<< HEAD
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Backup files
+*.~
+
+=======
+# Don’t commit the following directories.
+# NONE
+
+# Or the files created
+*.o
+*~
+exec
+
+# Include when developing application packages.
+pubspec.lock
+>>>>>>> 05e23fa6a5cb12d183471793cf94071ebf7857c2
