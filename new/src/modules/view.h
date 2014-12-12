@@ -24,19 +24,19 @@
 using namespace std;
 
 class View {
-	private:
-		SDL_Window *window;
-		SDL_Surface *screen;
-		SDL_Rect offset;
+private:
+    SDL_Window *window;
+    SDL_Surface *screen;
+    SDL_Rect offset;
 
-		void setOffset(int x, int y);
-	public:
-		View();
-		~View();
-		void update();
-		void clear();
-		void setImage(SDL_Surface **ptr, int x, int y);
-		int getMenuSpace();
+    void setOffset(int x, int y);
+public:
+    View();
+    ~View();
+    void update();
+    void clear();
+    void setImage(SDL_Surface **ptr, int x, int y);
+    int getMenuSpace();
 };
 
 #endif

@@ -9,9 +9,10 @@
 #define UNDO_SOURCE "file/undo.bin"
 #define REDO_SOURCE "file/redo.bin"
 
- #define MAX_ROLL 3
+#define MAX_ROLL 3
 
 // Constructor
+
 Map::Map() {
     Map::startMatrix();
     mem.x = 0;
@@ -19,21 +20,22 @@ Map::Map() {
 
     view = new View();
     image = new Image();
-    
-	this->run = true;
+
+    this->run = true;
 }
 
 // Destructor
+
 Map::~Map() {
     delete view;
     view = NULL;
     delete image;
     image = NULL;
     this->run = false;
-} 
+}
 
 void Map::clear() {
-    
+
     // map->cleanSelection();  // Clean selected tile
     view->clear();
 }
@@ -51,27 +53,31 @@ void Map::quit() {
 }
 
 // Get if it is running
+
 bool Map::isRunning() {
-	return this->run;
+    return this->run;
 }
 
 // Set if it is running
+
 void Map::setRunning(bool state) {
-	this->run = state;
+    this->run = state;
 }
 
 // Update view
-void Map::update(){
-	view->update();
+
+void Map::update() {
+    view->update();
 }
 
 // ### Save Methods ###
 
 // save undo file
+
 bool Map::saveUndo() {
-	FILE *file = fopen(UNDO_SOURCE, "wb+");
+    FILE *file = fopen(UNDO_SOURCE, "wb+");
     if (file == NULL) {
-       cout << "Erro ao carregar arquivo -- save" << endl;
+        cout << "Erro ao carregar arquivo -- save" << endl;
         return false;
     }
 
@@ -85,8 +91,9 @@ bool Map::saveUndo() {
 }
 
 // save redo file
+
 bool Map::saveRedo() {
-	FILE *file = fopen(REDO_SOURCE, "wb+");
+    FILE *file = fopen(REDO_SOURCE, "wb+");
     if (file == NULL) {
         cout << "Erro ao carregar arquivo -- save" << endl;
         return false;
@@ -101,7 +108,7 @@ bool Map::saveRedo() {
 }
 
 bool Map::saveMap() {
-	FILE *file = fopen(FILE_SOURCE, "wb+");
+    FILE *file = fopen(FILE_SOURCE, "wb+");
     if (file == NULL) {
         cout << "Erro ao carregar arquivo -- save" << endl;
         return false;
@@ -119,15 +126,16 @@ bool Map::saveMap() {
 
 // ### Load methods ###
 // load redo file
+
 bool Map::loadRedo() {
-	FILE *file = fopen(REDO_SOURCE, "rb+");
+    FILE *file = fopen(REDO_SOURCE, "rb+");
     if (file == NULL) {
         cout << "Erro ao carregar arquivo -- load" << endl;
         return false;
     }
     fseek(file, 0, SEEK_END);
     if (ftell(file) < COL * LIN) {
-        cout<< "Erro - arquivo corrompido!" << endl;
+        cout << "Erro - arquivo corrompido!" << endl;
         return false;
     }
     fseek(file, 0, SEEK_SET);
@@ -139,8 +147,9 @@ bool Map::loadRedo() {
 }
 
 // laod undo file
+
 bool Map::loadUndo() {
-	FILE *file = fopen(UNDO_SOURCE, "rb+");
+    FILE *file = fopen(UNDO_SOURCE, "rb+");
     if (file == NULL) {
         cout << "Erro ao carregar arquivo -- load" << endl;
         return false;
@@ -164,6 +173,7 @@ bool Map::loadUndo() {
 // w = x = COL
 
 // Clean selection point
+
 void Map::cleanSelection() {
     for (int i = 0; i < COL; i++) {
         for (int j = 0; j < LIN; j++) {
@@ -174,7 +184,6 @@ void Map::cleanSelection() {
     }
 }
 
-
 SDL_Point Map::getSelection() {
     SDL_Point point;
     point.x = -1;
@@ -183,9 +192,9 @@ SDL_Point Map::getSelection() {
     for (int i = 0; i < COL; i++) {
         for (int j = 0; j < LIN; j++) {
             if (map[i][j] == SELECT) {
-                    point.x = i;
-                    point.y = j;
-                    break;
+                point.x = i;
+                point.y = j;
+                break;
             }
         }
     }
@@ -194,6 +203,7 @@ SDL_Point Map::getSelection() {
 
 
 // Set mouse on click point
+
 SDL_Point Map::toMatrixPosition(SDL_Point mPosition) {
 
 
@@ -213,14 +223,14 @@ void Map::matrixToImage() {
 
     mem.x = 0;
     mem.y = 0;
-    
+
     view->clear();
 
     for (int i = 0; i < COL; i++) {
         for (int j = 0; j < LIN; j++) {
             ptr = image->getImage(map[i][j] % 10, map[i][j] / 10);
-            if(ptr != NULL) {
-                view->setImage(ptr, i*SQUARE_SIZE, j*SQUARE_SIZE);
+            if (ptr != NULL) {
+                view->setImage(ptr, i*SQUARE_SIZE, j * SQUARE_SIZE);
             }
         }
     }
@@ -241,6 +251,7 @@ void Map::setRight(SDL_Point point, int value) {
 
 
 // Apply to all tiles on the below
+
 void Map::setBelow(SDL_Point point, int value) {
     for (int i = point.y; i < LIN; i++) {
         map[point.x][i] = value;
@@ -248,14 +259,16 @@ void Map::setBelow(SDL_Point point, int value) {
 }
 
 // Apply to all tiles on the left
+
 void Map::setLeft(SDL_Point point, int value) {
-    for (int i = point.x; i >=0; i--) {
+    for (int i = point.x; i >= 0; i--) {
         map[i][point.y] = value;
     }
 }
 
 
 // Apply to all tiles on the above
+
 void Map::setAbove(SDL_Point point, int value) {
     for (int i = point.y; i >= 0; i--) {
         map[point.x][i] = value;
@@ -263,6 +276,7 @@ void Map::setAbove(SDL_Point point, int value) {
 }
 
 // Apply to all tiles
+
 void Map::setAll(int value) {
     for (int i = 0; i < COL; i++) {
         for (int j = 0; j < LIN; j++) {
@@ -283,7 +297,7 @@ void Map::fillMap() {
 }
 
 void Map::saveMemoryValue(SDL_Point point) {
-    mem_value = map[point.x][point.y];  // Save the value in the position map[x][y]
+    mem_value = map[point.x][point.y]; // Save the value in the position map[x][y]
     mem = point;
 }
 
@@ -301,7 +315,7 @@ void Map::loadMemoryValue(SDL_Point point) {
 
 void Map::setMatrix(int x, int y, int value) {
     map[x][y] = value;
-}  
+}
 
 bool Map::loadMap() {
     FILE *file = fopen(FILE_SOURCE, "rb+");

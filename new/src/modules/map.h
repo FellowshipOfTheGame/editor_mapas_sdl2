@@ -19,84 +19,84 @@
 using namespace std;
 
 class Map {
-	private:
-		bool run;
-		int map[COL][LIN]; 	// Draw map
-		SDL_Point mem; 			// Save mouse point
-		int mem_value; 			// Save value to restore
-		View *view;
-		Image *image;
+private:
+    bool run;
+    int map[COL][LIN]; // Draw map
+    SDL_Point mem; // Save mouse point
+    int mem_value; // Save value to restore
+    View *view;
+    Image *image;
 
-		void startMatrix();
-		
-	public:
-		Map();	// Constructor
-		~Map();	// Destructor
+    void startMatrix();
 
-		void update(); 	// Update view
-		void clear();
-		bool isRunning();
-		void setRunning(bool state);
+public:
+    Map(); // Constructor
+    ~Map(); // Destructor
 
-		// Save
-		bool saveUndo();	
-		bool saveRedo();	
-		bool saveMap();
+    void update(); // Update view
+    void clear();
+    bool isRunning();
+    void setRunning(bool state);
 
-		SDL_Point getMemoryPoint();
+    // Save
+    bool saveUndo();
+    bool saveRedo();
+    bool saveMap();
 
-		// Load
-		bool loadUndo();
-		bool loadRedo();
-		bool loadMap();
+    SDL_Point getMemoryPoint();
 
-		void quit();
-		
-		// Set mouse on click point
-		SDL_Point toMatrixPosition(SDL_Point mPosition);
-		
-		// Clean selection point
-		void cleanSelection();
+    // Load
+    bool loadUndo();
+    bool loadRedo();
+    bool loadMap();
 
-		SDL_Point getSelection();
+    void quit();
 
-		// Change image
-		bool tradeImage(SDL_Surface **surface, string str);
+    // Set mouse on click point
+    SDL_Point toMatrixPosition(SDL_Point mPosition);
 
-		// Set image for every value of mapa[COL][LIN]
-		void matrixToImage();
-		// -- SPECIAL FEATURES --
+    // Clean selection point
+    void cleanSelection();
 
-		// Repeat selected image to every point right the selection
-		void setRight(SDL_Point point, int value);
-		
-		// Repeat selected image to every point down the selection
-		// Apply to all tiles on the below
-		void setBelow(SDL_Point point, int value);
+    SDL_Point getSelection();
 
-		// Apply to all tiles on the left
-		void setLeft(SDL_Point point, int value);
+    // Change image
+    bool tradeImage(SDL_Surface **surface, string str);
+
+    // Set image for every value of mapa[COL][LIN]
+    void matrixToImage();
+    // -- SPECIAL FEATURES --
+
+    // Repeat selected image to every point right the selection
+    void setRight(SDL_Point point, int value);
+
+    // Repeat selected image to every point down the selection
+    // Apply to all tiles on the below
+    void setBelow(SDL_Point point, int value);
+
+    // Apply to all tiles on the left
+    void setLeft(SDL_Point point, int value);
 
 
-		// Apply to all tiles on the above
-		void setAbove(SDL_Point point, int value);
+    // Apply to all tiles on the above
+    void setAbove(SDL_Point point, int value);
 
-		// Apply to all tiles
-		void setAll(int value);
+    // Apply to all tiles
+    void setAll(int value);
 
-		// Reset mapa[COL][LIN] with EMPTY
-		void emptyMap();
+    // Reset mapa[COL][LIN] with EMPTY
+    void emptyMap();
 
-		// Fill mapa[COL][[LIN] with select image
-		void fillMap();
+    // Fill mapa[COL][[LIN] with select image
+    void fillMap();
 
-		void saveMemoryValue(SDL_Point point);
+    void saveMemoryValue(SDL_Point point);
 
-		void loadMemoryValue(SDL_Point point);
+    void loadMemoryValue(SDL_Point point);
 
-		void setMatrix(int x, int y, int value);
+    void setMatrix(int x, int y, int value);
 
-		int getMemoryValue();
+    int getMemoryValue();
 };
 
 #endif

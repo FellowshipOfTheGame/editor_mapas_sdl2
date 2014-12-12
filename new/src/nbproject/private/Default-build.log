@@ -1,0 +1,23 @@
+g++    -c -o main.o main.cpp
+g++    -c -o control.o control.cpp
+control.cpp:38:1: error: redefinition of ‘Control::~Control()’
+ Control::~Control() {
+ ^
+control.cpp:13:1: error: ‘Control::~Control()’ previously defined here
+ Control::~Control() {
+ ^
+control.cpp:43:6: error: redefinition of ‘void Control::loop()’
+ void Control::loop() {
+      ^
+control.cpp:20:6: error: ‘void Control::loop()’ previously defined here
+ void Control::loop() {
+      ^
+control.cpp: In member function ‘void Control::keyDown()’:
+control.cpp:74:25: error: a function-definition is not allowed here before ‘{’ token
+ void Control::keyDown() {
+                         ^
+control.cpp:428:1: error: expected ‘}’ at end of input
+ }
+ ^
+control.cpp:428:1: error: expected ‘}’ at end of input
+make: ** [control.o] Erro 1

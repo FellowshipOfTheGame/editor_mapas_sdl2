@@ -1,9 +1,9 @@
 #include "modules/control.h"
 
 int main() {
-	Control *c = new Control();
+    Control *c = new Control();
 
-	delete c;
-	return 0;
+    delete c;
+    return 0;
 }
 

@@ -1,0 +1,16 @@
+called: g++
+	/home/lcsvcn/Downloads/editor_mapas_sdl2-master/new/src
+	g++
+	-c
+	-o
+	main.o
+	main.cpp
+
+called: g++
+	/home/lcsvcn/Downloads/editor_mapas_sdl2-master/new/src
+	g++
+	-c
+	-o
+	control.o
+	control.cpp
+

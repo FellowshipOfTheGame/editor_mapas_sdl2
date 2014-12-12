@@ -18,27 +18,27 @@ class Control {
 private:
     Map *map;
     Image *img;
-    SDL_Event event; 	// Initialize event handler
-    SDL_Point mPos;		// Matrix position
+    SDL_Event event; // Initialize event handler
+    SDL_Point mPos; // Matrix position
     int roll;
     void save(int mode);
 
 public:
-	Control();
-	~Control();
+    Control();
+    ~Control();
 
-	void loop();
+    void loop();
 
-	void keyDown();
+    void keyDown();
 
-	void mouseButtonDown();
+    void mouseButtonDown();
 
-	void moveUp();
-	void moveDown();
-	void moveLeft();
-	void moveRight();
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
 
-	void update(int x, int y, int value);
+    void update(int x, int y, int value);
 };
 
 #endif
